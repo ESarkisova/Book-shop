@@ -1,19 +1,10 @@
-import React, {useEffect} from 'react';
 import {connect} from "react-redux";
-import Books from "./Books";
-import {getBooks} from "../actions/book";
+import Sidebar from "./Sidebar";
+import {setSort} from "../actions/filter";
 
-const BookApi = (props) => {
-   useEffect(() => {
-        props.getBooks();
-    }, []);
 
-    return <Books {...props}/>
-};
-
-const mapStateToProps = ({ book }) => ({
-    books: book.books,
-    isLoading: book.isLoading
+const mapStateToProps = ({ filter }) => ({
+    filter: filter.filter
 });
 
-export default connect(mapStateToProps, {getBooks})(BookApi);
+export default connect(mapStateToProps, {setSort})(Sidebar);

@@ -1,22 +1,34 @@
-import {SET_BOOKS, SET_IS_LOAD} from "../actions/types";
+import {ADD_TO_CART, CART_IS_SHOW, CHANGE_COUNT_BOOK, REMOVE_FROM_CART} from "../actions/types";
 
 const initialState = {
-    books: [],
-    isLoading: false
+    items: [],
+    isShow: false
 };
 
-const bookReducer = (state = initialState, action) => {
+const cartReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_BOOKS:
+        case CART_IS_SHOW:
             return {
                 ...state,
-                books: action.payload,
-                isLoading: false
+                isShow: action.payload
             };
-        case SET_IS_LOAD:
+        case ADD_TO_CART:
             return {
                 ...state,
-                isLoading: action.payload
+                items: [...state.items, {...action.payload, count: 1}]
+            };
+        case REMOVE_FROM_CART:
+            return {
+                ...state,
+                items: [...state.items.filter((cartItem) => +cartItem.id !== +action.payload) ]
+            };
+        case CHANGE_COUNT_BOOK:
+            return {
+                ...state,
+                items: state.items.map((cartItem) => {
+                   if(+cartItem.id === +action.payload.id) cartItem.count = +action.payload.count;
+                       return cartItem
+                })
             };
         default:
             return state
@@ -24,4 +36,4 @@ const bookReducer = (state = initialState, action) => {
     }
 };
 
-export default bookReducer;
+export default cartReducer;

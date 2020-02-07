@@ -1,20 +1,28 @@
-import {SET_BOOKS} from "../actions/types";
+import {CHANGE_SEARCH, SET_SORT} from "../actions/types";
+
 
 const initialState = {
-    books: []
+    filter: 'all',
+    searchText: ''
 };
 
-const bookReducer = (state = initialState, action) => {
+const filterReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_BOOKS:
+        case SET_SORT:
             return {
                 ...state,
-                books: action.payload
+                filter: action.payload
             };
+        case CHANGE_SEARCH:
+            return {
+                ...state,
+                searchText: action.payload
+            };
+
         default:
             return state
         
     }
 };
 
-export default bookReducer;
+export default filterReducer;

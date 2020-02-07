@@ -1,6 +1,11 @@
-import {SET_BOOKS} from "./types";
+import {CHANGE_SEARCH, SET_SORT} from "./types";
 
-export const setBooks = (books) = ({
-    type: SET_BOOKS,
-    payload: books
+export const setSort = (type) => ({
+    type: SET_SORT,
+    payload: type
+});
+
+export const changeSearchText = (text) => ({
+    type: CHANGE_SEARCH,
+    payload: text
 });
